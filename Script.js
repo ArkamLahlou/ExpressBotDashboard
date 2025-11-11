@@ -1,5 +1,3 @@
-// الملف: script.js
-
 document.getElementById('activate-bot-btn').addEventListener('click', function() {
     
     // ملاحظة: يجب تغيير هذا الرابط لاحقاً ليصبح رابط البوت الفعلي على Heroku
@@ -9,36 +7,26 @@ document.getElementById('activate-bot-btn').addEventListener('click', function()
     const statusElement = document.getElementById('bot-status');
 
     // 1. تغيير حالة الزر أثناء الإرسال
-    button.textContent = 'جاري الاتصال بالبوت... ⏳';
+    button.textContent = 'جاري الاتصال بالبوت عبر Axios... ⏳';
     button.disabled = true;
     statusElement.textContent = 'جاري إرسال طلب التفعيل إلى الخادم...';
     
-    // 2. إرسال الطلب إلى خادم البوت (الخلفية)
-    fetch(apiEndpoint, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-        // يمكن إرسال بيانات (مثل ID المستخدم) هنا
+    // 2. استخدام Axios لإرسال طلب POST
+    axios.post(apiEndpoint, {
+        // يمكنك إرسال أي بيانات هنا للبوت، مثل ID المستخدم أو قائمة روابط معينة
+        user_id: "your_unique_id",
+        action: "start_scheduled_publish"
     })
     .then(response => {
-        if (!response.ok) {
-            // التعامل مع الأخطاء التي تأتي من الخادم (مثل 500)
-            throw new Error('فشل الاتصال: رمز الخطأ ' + response.status);
-        }
-        return response.json();
-    })
-    .then(data => {
-        // 3. نجاح الاتصال
-        statusElement.textContent = '✅ تم التفعيل بنجاح! البوت بدأ بمراجعة الروابط.';
+        // 3. نجاح الاتصال (response.data هو محتوى الـ JSON الذي يرسله البوت)
+        statusElement.textContent = `✅ تم التفعيل بنجاح! رسالة الخادم: ${response.data.message}`;
         button.textContent = 'تم التفعيل (قيد التشغيل) ✔️';
-        console.log('رسالة الخادم:', data.message);
-        // لا نعيد تفعيل الزر لكون البوت قد بدأ مهمته
+        console.log('رسالة الخادم:', response.data);
     })
     .catch(error => {
         // 4. فشل الاتصال
-        statusElement.textContent = '❌ فشل التفعيل: تأكد من تشغيل البوت على الخادم. ' + error.message;
-        button.textContent = 'فشل التفعيل! إعادة المحاولة؟';
-        button.disabled = false; // نتيح إمكانية المحاولة مرة أخرى
-    });
-});
+        let errorMessage = 'فشل التفعيل! تأكد من تشغيل البوت.';
+        if (error.response) {
+            errorMessage += ` رمز الحالة: ${error.response.status}. رسالة: ${error.response.data.message}`;
+        }
+        statusElement.t

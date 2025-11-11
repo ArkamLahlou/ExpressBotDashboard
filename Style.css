@@ -1,0 +1,78 @@
+/* الملف: style.css */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6; /* خلفية هادئة */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+header {
+    background-color: #0088cc; /* لون جذاب يذكر ببعض منصات التواصل */
+    color: white;
+    padding: 40px 20px;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.status-box {
+    background-color: #ffffff;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.status-box h2 {
+    color: #0088cc;
+    margin-top: 0;
+}
+
+.main-button {
+    background-color: #4CAF50; /* أخضر للتفعيل */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px; /* شكل دائري لجذب الانتباه */
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-bottom: 40px;
+}
+
+.main-button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.main-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.links-preview {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: right;
+    border-top: 5px solid #0088cc;
+}
+
+footer {
+    padding: 20px;
+    margin-top: 50px;
+    font-size: 0.8em;
+    color: #777;
+  }
